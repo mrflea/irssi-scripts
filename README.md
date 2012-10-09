@@ -10,7 +10,7 @@ scrollback.pl is designed as a clone of x-chat's log replay, with many enhanceme
 
 ### quickwin.pl
 
-quickwin.pl is designed for users with many windows to quickly switch between them.  Instead of typing /w <number>, you can type only /<number>.
+quickwin.pl is designed for users with many windows to quickly switch between them.  Instead of typing `/w <number>`, you can type only `/<number>`.
 
 ### slashslash.pl
 
