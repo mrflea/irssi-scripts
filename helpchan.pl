@@ -9,6 +9,8 @@ use vars qw($VERSION %IRSSI);
 # helpchan_channels = esper:#dragonweyr:#secret_oper_channel esper:#help:#secret_oper_channel
 
 # Changelog:
+# Version 1.4:
+#	*	Ignore chanops in addition to people in the op channel.
 # Version 1.3:
 #	*	Like 1.21, except actually works! (1-character bugfix.)
 # Version 1.21:
@@ -35,7 +37,7 @@ $VERSION = "1.3";
 	description	=> "Hilight a channel when a non-operator joins.",
 	license		=> "BSD",
 	url			=> "http://www.phantomflame.com/",
-	changed		=> "Wed 14 Apr 2010 02:42:16 PM PDT"
+	changed		=> "Thu 27 Dec 2012 10:08:06 AM UTC"
 );
 
 Irssi::settings_add_int('misc', 'helpchan_delay', 3);
@@ -106,6 +108,9 @@ sub join_opcheck {
 		# Make sure we and them are still in the help channel.
 		my $helpchan = $server->channel_find($rec->{channel});
 		last if (!$helpchan || !$helpchan->nick_find($nick));
+
+		# Make sure they aren't opped in the help channel.
+		last if ($helpchan->nick_find($nick)->{op});
 
 		# Check the operator channel for the nick.
 		my $opchan = $server->channel_find($rec->{opchan});
